@@ -45,12 +45,7 @@ export class Usuario {
 
   @Transform(({ value }: TransformFnParams) => value?.trim())
   @Column({ length: 255, nullable: true })
-  endereco_loja: string;
-
-  @Transform(({ value }: TransformFnParams) => value?.trim())
-  @IsNotEmpty()
-  @Column({ length: 255, nullable: false })
-  endereco_entrega: string;
+  endereco: string;
 
   @CreateDateColumn()
   criado_em: Date;
