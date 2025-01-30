@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CategoriaModule } from './categoria/categoria.module';
+import { UsuarioModule } from './Usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
-
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: 'mysql',
@@ -9,13 +10,16 @@ import { AuthModule } from './auth/auth.module';
     port: 3306,
     username: 'root',
     password: 'root',
-    database: '', // Cadastrar o nome do BD
-    autoLoadEntities: true, // Cadastrar as Classes Entities, para que o 
-    // TypeORM possa gerar as tabelas correspondentes no BD
+    database: 'db_food_delivery_app', // Cadastrar o nome do BD
+    autoLoadEntities: true,
     synchronize: true,
     logging: true
   }),
-  AuthModule
+      AuthModule,
+      CategoriaModule,
+      UsuarioModule
+  // Inserir nome da classe module de cada entidade (ex.: PostagemModule)
+
   ],
   controllers: [],
   providers: [],

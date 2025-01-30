@@ -1,5 +1,5 @@
 import { JwtService } from '@nestjs/jwt';
-//import { UsuarioService } from '../../usuario/service/usuario.service';
+import { UsuarioService } from '../../Usuario/services/usuario.service';
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { Bcrypt } from '../bcrypt/bcrypt';
 import { UsuarioLogin } from '../entities/usuariologin.entity';
@@ -7,16 +7,13 @@ import { UsuarioLogin } from '../entities/usuariologin.entity';
 
 @Injectable()
 export class AuthService{
-    login(user: UsuarioLogin): any {
-        throw new Error('Method not implemented.');
-    }
     constructor(
-        //private usuarioService: UsuarioService,
+        private usuarioService: UsuarioService,
         private jwtService: JwtService,
         private bcrypt: Bcrypt
     ){ }
 
-    /*async validateUser(username: string, password: string): Promise<any>{
+    async validateUser(username: string, password: string): Promise<any>{
 
         const buscaUsuario = await this.usuarioService.findByUsuario(username)
 
@@ -42,12 +39,12 @@ export class AuthService{
 
         return{
             id: buscaUsuario.id,
-            nome: buscaUsuario.nome,
+            nome: buscaUsuario.nome_usuario,
             usuario: usuarioLogin.usuario,
             senha: '',
             foto: buscaUsuario.foto,
             token: `Bearer ${this.jwtService.sign(payload)}`,
         }
 
-    }*/
+    }
 }
