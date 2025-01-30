@@ -1,20 +1,6 @@
 import { Transform, TransformFnParams } from 'class-transformer';
-import {
-  IsBoolean,
-  IsNotEmpty,
-  IsNumber,
-  IsPositive,
-  IsString,
-  Length,
-} from 'class-validator';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { IsBoolean, IsNotEmpty, IsNumber, IsPositive, IsString, Length, } from 'class-validator';
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn, } from 'typeorm';
 import { NumericTransformer } from '../../util/numericTransformer';
 import { Categoria } from '../../categoria/entities/categoria.entity';
 import { Usuario } from '../../Usuario/entities/usuario.entity';

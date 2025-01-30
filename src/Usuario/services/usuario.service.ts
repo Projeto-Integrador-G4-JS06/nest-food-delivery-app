@@ -16,6 +16,7 @@ export class UsuarioService {
       where: {
         usuario: usuario,
       },
+      relations: { produto: true },
     });
   }
 
@@ -24,11 +25,14 @@ export class UsuarioService {
       where: {
         nome_usuario: ILike(`%${nome_usuario}%`),   
       },
+      relations: { produto: true },
     });
   }
 
   async findAll(): Promise<Usuario[]> {
-    return await this.usuarioRepository.find();
+    return await this.usuarioRepository.find({
+      relations: { produto: true },
+    });
   }
 
   async findById(id: number): Promise<Usuario> {
@@ -36,6 +40,7 @@ export class UsuarioService {
       where: {
         id,
       },
+      relations: { produto: true }
     });
 
     if (!usuario)
