@@ -75,6 +75,15 @@ export class ProdutoService {
     });
   }
 
+  async findByFornecedor(nome_usuario: string): Promise<Produto[]> {
+    return this.produtoRepository
+      .createQueryBuilder('p')
+      .innerJoinAndSelect('p.usuario', 'u')
+      .where('u.nome_usuario = :nome_usuario', { nome_usuario })
+      .andWhere('u.tipo = :tipo', { tipo: 'fornecedor' })
+      .getMany();
+  }
+
   async create(produto: Produto): Promise<Produto> {
     // Verifica se o produto existe antes de criar
     await this.categoriaService.findById(produto.categoria.id);
