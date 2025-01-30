@@ -12,32 +12,11 @@ import {
 } from '@nestjs/common';
 import { UsuarioService } from '../services/usuario.service';
 import { Usuario } from '../entities/usuario.entity';
-// import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 
 @Controller('/usuarios')
 export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) {}
-
-  //   @UseGuards(JwtAuthGuard)
-  @Get('/all')
-  @HttpCode(HttpStatus.OK)
-  findAll(): Promise<Usuario[]> {
-    return this.usuarioService.findAll();
-  }
-
-  //   @UseGuards(JwtAuthGuard)
-  @Get('/:id')
-  @HttpCode(HttpStatus.OK)
-  findById(@Param('id', ParseIntPipe) id: number): Promise<Usuario> {
-    return this.usuarioService.findById(id);
-  }
-
-  //   @UseGuards(JwtAuthGuard)
-  @Get('/nome/:nome')
-  @HttpCode(HttpStatus.OK)
-  findByNome(@Param('nome') nome_usuario: string): Promise<Usuario[]> {
-    return this.usuarioService.findByNome(nome_usuario);
-  }
 
   @Post('/cadastrar')
   @HttpCode(HttpStatus.CREATED)
@@ -45,7 +24,7 @@ export class UsuarioController {
     return this.usuarioService.create(usuario);
   }
 
-  //   @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Put('/atualizar')
   @HttpCode(HttpStatus.OK)
   async update(@Body() usuario: Usuario): Promise<Usuario> {

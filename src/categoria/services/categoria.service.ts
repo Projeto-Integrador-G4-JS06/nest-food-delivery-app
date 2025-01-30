@@ -35,6 +35,16 @@ export class CategoriaService {
         return categoria;
     };
 
+    async findByNomeCategoria(nome_categoria: string): Promise<Categoria[]> {
+        return this.categoriaRepository.find({
+          where: {
+            nome_categoria: ILike(`%${nome_categoria}%`),
+          },
+        //   relations: {
+        //     produto: true,
+        //   },
+        });
+      }
   
     async create(categoria: Categoria): Promise<Categoria> {
         return await this.categoriaRepository.save(categoria);
