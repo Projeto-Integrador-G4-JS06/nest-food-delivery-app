@@ -19,17 +19,6 @@ export class UsuarioService {
     });
   }
 
-  async findByNome(nome_usuario: string): Promise<Usuario[]> {
-    return this.usuarioRepository.find({
-      where: {
-        nome_usuario: ILike(`%${nome_usuario}%`),   
-      },
-    });
-  }
-
-  async findAll(): Promise<Usuario[]> {
-    return await this.usuarioRepository.find();
-  }
 
   async findById(id: number): Promise<Usuario> {
     const usuario = await this.usuarioRepository.findOne({
