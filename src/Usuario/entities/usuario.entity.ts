@@ -1,6 +1,14 @@
 import { Transform, TransformFnParams } from 'class-transformer';
 import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Produto } from '../../produto/entities/produto.entity';
 
 @Entity({ name: 'tb_usuarios' })
 export class Usuario {
@@ -58,6 +66,6 @@ export class Usuario {
   @UpdateDateColumn()
   atualizado_em: Date;
 
-//   @OneToMany(() => Produto, (produto) => produto.usuario)
-//   produto: Produto[];
+  @OneToMany(() => Produto, (produto) => produto.usuario)
+  produto: Produto[];
 }
