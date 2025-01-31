@@ -1,6 +1,14 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Produto } from '../entities/produto.entity';
-import { DeleteResult, ILike, In, LessThan, ManyToOne, MoreThan, Repository } from 'typeorm';
+import {
+  DeleteResult,
+  ILike,
+  In,
+  LessThan,
+  ManyToOne,
+  MoreThan,
+  Repository,
+} from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategoriaService } from '../../categoria/services/categoria.service';
 import { Usuario } from '../../Usuario/entities/usuario.entity';

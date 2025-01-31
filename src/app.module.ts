@@ -1,14 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoriaModule } from './categoria/categoria.module';
-<<<<<<< HEAD
 import { ProdutoModule } from './produto/produto.module';
 import { UsuarioModule } from './Usuario/usuario.module';
-
-=======
-import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
->>>>>>> bb7c047a7189c7835edd98d37e85b2afbcc4c85d
+import { AppController } from './app.controller';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -22,17 +18,13 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
       logging: true,
     }),
-<<<<<<< HEAD
-    CategoriaModule,
-    ProdutoModule,
-=======
     AuthModule,
     CategoriaModule,
->>>>>>> bb7c047a7189c7835edd98d37e85b2afbcc4c85d
     UsuarioModule,
+    ProdutoModule,
     // Inserir nome da classe module de cada entidade (ex.: PostagemModule)
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
