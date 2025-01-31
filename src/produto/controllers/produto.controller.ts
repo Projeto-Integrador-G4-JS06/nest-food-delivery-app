@@ -37,18 +37,18 @@ export class ProdutoController {
     return this.produtoService.findByNutriScore();
   }
 
+  @Get('/:id')
+  @HttpCode(HttpStatus.OK)
+  findById(@Param('id', ParseIntPipe) id: number): Promise<Produto> {
+    return this.produtoService.findById(id);
+  }
+
   @Get('/fornecedor/:nome_usuario')
   @HttpCode(HttpStatus.OK)
   findByFornecedor(
     @Param('nome_usuario') nome_usuario: string,
   ): Promise<Produto[]> {
     return this.produtoService.findByFornecedor(nome_usuario);
-  }
-
-  @Get('/:id')
-  @HttpCode(HttpStatus.OK)
-  findById(@Param('id', ParseIntPipe) id: number): Promise<Produto> {
-    return this.produtoService.findById(id);
   }
 
   @Get('nome/:nome_produto')
