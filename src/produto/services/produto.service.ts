@@ -11,7 +11,7 @@ import {
 } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategoriaService } from '../../categoria/services/categoria.service';
-import { Usuario } from '../../Usuario/entities/usuario.entity';
+import { Usuario } from '../../usuario/entities/usuario.entity';
 
 @Injectable()
 export class ProdutoService {
@@ -21,14 +21,16 @@ export class ProdutoService {
     private categoriaService: CategoriaService,
   ) {}
 
-  @ManyToOne(() => Usuario, (usuario) => usuario.produto, {
-    onDelete: 'CASCADE',
-  })
-  usuario: Usuario;
-
   async findAll(): Promise<Produto[]> {
     return this.produtoRepository.find({
       relations: { categoria: true },
+    });
+  }
+
+  async findByNutriScore(): Promise<Produto[]> {
+    return this.produtoRepository.find({
+      // where: { nutri_score: In(['A', 'B'])},
+      where: [{ nutri_score: 'A' }, { nutri_score: 'B' }],
     });
   }
 
@@ -45,6 +47,15 @@ export class ProdutoService {
       );
 
     return postagem;
+  }
+
+  async findByFornecedor(nome_usuario: string): Promise<Produto[]> {
+    return this.produtoRepository
+      .createQueryBuilder('p')
+      .innerJoinAndSelect('p.usuario', 'u')
+      .where('u.nome_usuario = :nome_usuario', { nome_usuario })
+      .andWhere('u.tipo = :tipo', { tipo: 'fornecedor' })
+      .getMany();
   }
 
   async findByNome(nome_produto: string): Promise<Produto[]> {
@@ -70,26 +81,10 @@ export class ProdutoService {
     });
   }
 
-  async findByNutriScore(): Promise<Produto[]> {
-    return this.produtoRepository.find({
-      // where: { nutri_score: In(['A', 'B'])},
-      where: [{ nutri_score: 'A' }, { nutri_score: 'B' }],
-    });
-  }
-
   async findByStatus(status: boolean): Promise<Produto[]> {
     return this.produtoRepository.find({
       where: { status },
     });
-  }
-
-  async findByFornecedor(nome_usuario: string): Promise<Produto[]> {
-    return this.produtoRepository
-      .createQueryBuilder('p')
-      .innerJoinAndSelect('p.usuario', 'u')
-      .where('u.nome_usuario = :nome_usuario', { nome_usuario })
-      .andWhere('u.tipo = :tipo', { tipo: 'fornecedor' })
-      .getMany();
   }
 
   async create(produto: Produto): Promise<Produto> {
@@ -114,4 +109,9 @@ export class ProdutoService {
 
     return this.produtoRepository.delete(id);
   }
+
+  @ManyToOne(() => Usuario, (usuario) => usuario.produto, {
+    onDelete: 'CASCADE',
+  })
+  usuario: Usuario;
 }

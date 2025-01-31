@@ -4,7 +4,7 @@ import { IsBoolean, IsNotEmpty, IsNumber, IsPositive, IsString, Length, } from '
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn, } from 'typeorm';
 import { NumericTransformer } from '../../util/numericTransformer';
 import { Categoria } from '../../categoria/entities/categoria.entity';
-import { Usuario } from '../../Usuario/entities/usuario.entity';
+import { Usuario } from '../../usuario/entities/usuario.entity';
 
 @Entity({ name: 'tb_produtos' })
 export class Produto {
