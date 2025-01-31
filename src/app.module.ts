@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoriaModule } from './categoria/categoria.module';
-import { UsuarioModule } from './usuario/usuario.module';
+import { ProdutoModule } from './produto/produto.module';
+import { UsuarioModule } from './Usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
+import { AppController } from './app.controller';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -19,9 +21,10 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
     CategoriaModule,
     UsuarioModule,
+    ProdutoModule,
     // Inserir nome da classe module de cada entidade (ex.: PostagemModule)
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}

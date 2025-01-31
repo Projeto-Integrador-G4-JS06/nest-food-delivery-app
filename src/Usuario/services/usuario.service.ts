@@ -16,6 +16,7 @@ export class UsuarioService {
       where: {
         usuario: usuario,
       },
+      relations: { produto: true },
     });
   }
 
@@ -25,6 +26,7 @@ export class UsuarioService {
       where: {
         id,
       },
+      relations: { produto: true }
     });
 
     if (!usuario)
