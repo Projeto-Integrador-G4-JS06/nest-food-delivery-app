@@ -56,10 +56,25 @@ export class ProdutoService {
   async findByFornecedor(nome_usuario: string): Promise<Produto[]> {
     return this.produtoRepository
       .createQueryBuilder('p')
-      .innerJoinAndSelect('p.usuario', 'u')
+      .select([
+        'p.id',
+        'p.nome',
+        'p.preco',
+        'p.descricao',
+        'p.foto_prod',
+        'u.nome_usuario AS fornecedor',
+        'u.foto AS logo_Fornecedor',
+        'c.nome AS Categoria',
+        'p.nutri_score',
+        'p.criado_em',
+        'p.atualizado_em',
+        "CASE WHEN p.status = 1 THEN 'Ativo' WHEN p.status = 0 THEN 'Inativo' END AS status_prod",
+      ])
+      .innerJoin('p.usuario', 'u')
+      .innerJoin('p.categoria', 'c')
       .where('u.nome_usuario = :nome_usuario', { nome_usuario })
       .andWhere('u.tipo = :tipo', { tipo: 'fornecedor' })
-      .getMany();
+      .getRawMany();
   }
 
   async findByNome(nome_produto: string): Promise<Produto[]> {
