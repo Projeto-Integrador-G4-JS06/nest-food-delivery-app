@@ -12,7 +12,7 @@ import { DevService } from './data/dev.service';
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
-      useClass: ProdService,
+      useClass: ProdService, // ProdService para Rodar no Deploy
       imports: [ConfigModule],
     }),
     AuthModule,
