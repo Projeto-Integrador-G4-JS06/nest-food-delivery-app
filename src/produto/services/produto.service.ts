@@ -73,7 +73,7 @@ export class ProdutoService {
         'p.nutri_score',
         'p.criado_em',
         'p.atualizado_em',
-        "CASE WHEN p.status = 1 THEN 'Ativo' WHEN p.status = 0 THEN 'Inativo' END AS status_prod",
+        "CASE WHEN p.status = true THEN 'Ativo' WHEN p.status = false THEN 'Inativo' END AS status_prod",
       ])
       .innerJoin('p.usuario', 'u')
       .innerJoin('p.categoria', 'c')
