@@ -146,13 +146,12 @@
 
 
 
-1. Clone o repositório: git clone https://github.com/Projeto-Integrador-G4-JS06/nest-food-delivery-app;
-2. Instale dependências: npm install;
+1. Clone o repositório: `git clone https://github.com/Projeto-Integrador-G4-JS06/nest-food-delivery-app`;
+2. Instale dependências: `npm install`;
 3. Configure variáveis de ambiente;
-4. Rode a aplicação: npm run start:dev.
+4. Rode a aplicação: `npm run start:dev`.
 
 
 
 <br>
-
 
