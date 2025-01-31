@@ -8,7 +8,7 @@ export class UsuarioService {
   constructor(
     @InjectRepository(Usuario)
     private usuarioRepository: Repository<Usuario>,
-     private bcrypt: Bcrypt,
+    private bcrypt: Bcrypt,
   ) {}
 
   async findByUsuario(usuario: string): Promise<Usuario | undefined> {
@@ -16,17 +16,14 @@ export class UsuarioService {
       where: {
         usuario: usuario,
       },
-      relations: { produto: true },
     });
   }
-
 
   async findById(id: number): Promise<Usuario> {
     const usuario = await this.usuarioRepository.findOne({
       where: {
         id,
       },
-      relations: { produto: true }
     });
 
     if (!usuario)
@@ -41,7 +38,7 @@ export class UsuarioService {
     if (buscaUsuario)
       throw new HttpException('O Usuario já existe!', HttpStatus.BAD_REQUEST);
 
-     usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha);
+    usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha);
     return await this.usuarioRepository.save(usuario);
   }
 
@@ -56,7 +53,7 @@ export class UsuarioService {
         HttpStatus.BAD_REQUEST,
       );
 
-     usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha);
+    usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha);
     return await this.usuarioRepository.save(usuario);
   }
 }
