@@ -109,9 +109,4 @@ export class ProdutoService {
 
     return this.produtoRepository.delete(id);
   }
-
-  @ManyToOne(() => Usuario, (usuario) => usuario.produto, {
-    onDelete: 'CASCADE',
-  })
-  usuario: Usuario;
 }
