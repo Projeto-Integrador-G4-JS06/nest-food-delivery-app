@@ -58,13 +58,13 @@ export class ProdutoService {
       .createQueryBuilder('p')
       .select([
         'p.id',
-        'p.nome',
+        'p.nome_produto',
         'p.preco',
         'p.descricao',
-        'p.foto_prod',
+        'p.foto',
         'u.nome_usuario AS fornecedor',
         'u.foto AS logo_Fornecedor',
-        'c.nome AS Categoria',
+        'c.nome_categoria AS Categoria',
         'p.nutri_score',
         'p.criado_em',
         'p.atualizado_em',
