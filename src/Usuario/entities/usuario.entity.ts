@@ -13,7 +13,6 @@ import { Produto } from '../../produto/entities/produto.entity';
 
 @Entity({ name: 'tb_usuarios' })
 export class Usuario {
-
   @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
@@ -24,7 +23,7 @@ export class Usuario {
   @Column({ length: 255, nullable: false })
   nome_usuario: string;
 
- @ApiProperty()
+  @ApiProperty()
   @Transform(({ value }: TransformFnParams) => value?.trim())
   @IsNotEmpty()
   @Column({ length: 14, nullable: false })
@@ -64,7 +63,8 @@ export class Usuario {
 
   @ApiProperty()
   @Transform(({ value }: TransformFnParams) => value?.trim())
-  @Column({ length: 255, nullable: true })
+  @IsNotEmpty()
+  @Column({ length: 255, nullable: false })
   endereco: string;
 
   @CreateDateColumn()
