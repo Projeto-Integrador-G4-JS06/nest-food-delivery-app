@@ -59,25 +59,27 @@ export class ProdutoService {
   }
 
   async findByFornecedor(nome_usuario: string): Promise<Produto[]> {
-    const produtos = await this.produtoRepository
+    return this.produtoRepository
       .createQueryBuilder('p')
-      .innerJoinAndSelect('p.usuario', 'u')
+      .select([
+        'p.id',
+        'p.nome_produto',
+        'p.preco',
+        'p.descricao',
+        'p.foto',
+        'u.nome_usuario AS fornecedor',
+        'u.foto AS logo_Fornecedor',
+        'c.nome_categoria AS Categoria',
+        'p.nutri_score',
+        'p.criado_em',
+        'p.atualizado_em',
+        "CASE WHEN p.status = 1 THEN 'Ativo' WHEN p.status = 0 THEN 'Inativo' END AS status_prod",
+      ])
+      .innerJoin('p.usuario', 'u')
+      .innerJoin('p.categoria', 'c')
       .where('u.nome_usuario = :nome_usuario', { nome_usuario })
       .andWhere('u.tipo = :tipo', { tipo: 'fornecedor' })
-      .select([
-        'p',
-        'u.nome_usuario', // Nome do fornecedor
-        'u.foto', // Foto de perfil do fornecedor
-      ])
-      .getMany();
-
-    if (produtos.length === 0) {
-      throw new NotFoundException(
-        `Não há nenhum fornecedor com o nome "${nome_usuario}".`,
-      );
-    }
-
-    return produtos;
+      .getRawMany();
   }
 
   async findByNome(nome_produto: string): Promise<Produto[]> {
