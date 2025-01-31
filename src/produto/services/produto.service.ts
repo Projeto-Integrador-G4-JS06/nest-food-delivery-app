@@ -5,13 +5,11 @@ import {
   ILike,
   In,
   LessThan,
-  ManyToOne,
   MoreThan,
   Repository,
 } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategoriaService } from '../../categoria/services/categoria.service';
-import { Usuario } from '../../usuario/entities/usuario.entity';
 
 @Injectable()
 export class ProdutoService {
@@ -23,7 +21,10 @@ export class ProdutoService {
 
   async findAll(): Promise<Produto[]> {
     return this.produtoRepository.find({
-      relations: { categoria: true },
+      relations: {
+        categoria: true,
+        usuario: true,
+      },
     });
   }
 
@@ -37,7 +38,10 @@ export class ProdutoService {
   async findById(id: number): Promise<Produto> {
     const postagem = await this.produtoRepository.findOne({
       where: { id },
-      relations: { categoria: true },
+      relations: {
+        categoria: true,
+        usuario: true,
+      },
     });
 
     if (!postagem)
@@ -61,14 +65,20 @@ export class ProdutoService {
   async findByNome(nome_produto: string): Promise<Produto[]> {
     return this.produtoRepository.find({
       where: { nome_produto: ILike(`%${nome_produto}%`) },
-      relations: { categoria: true },
+      relations: {
+        categoria: true,
+        usuario: true,
+      },
     });
   }
 
   async findMaiorValor(valor: number): Promise<Produto[]> {
     return this.produtoRepository.find({
       where: { preco: MoreThan(valor) },
-      relations: { categoria: true },
+      relations: {
+        categoria: true,
+        usuario: true,
+      },
       order: { preco: 'ASC' },
     });
   }
@@ -76,7 +86,10 @@ export class ProdutoService {
   async findMenorValor(valor: number): Promise<Produto[]> {
     return this.produtoRepository.find({
       where: { preco: LessThan(valor) },
-      relations: { categoria: true },
+      relations: {
+        categoria: true,
+        usuario: true,
+      },
       order: { preco: 'DESC' },
     });
   }
