@@ -29,7 +29,7 @@ export class Usuario {
   @Column({ length: 14, nullable: false })
   tipo: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'email@email.com.br' })
   @Transform(({ value }: TransformFnParams) => value?.trim())
   @IsEmail()
   @IsNotEmpty()

@@ -1,4 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Produto } from '../entities/produto.entity';
 import {
   DeleteResult,
@@ -54,12 +59,25 @@ export class ProdutoService {
   }
 
   async findByFornecedor(nome_usuario: string): Promise<Produto[]> {
-    return this.produtoRepository
+    const produtos = await this.produtoRepository
       .createQueryBuilder('p')
       .innerJoinAndSelect('p.usuario', 'u')
       .where('u.nome_usuario = :nome_usuario', { nome_usuario })
       .andWhere('u.tipo = :tipo', { tipo: 'fornecedor' })
+      .select([
+        'p',
+        'u.nome_usuario', // Nome do fornecedor
+        'u.foto', // Foto de perfil do fornecedor
+      ])
       .getMany();
+
+    if (produtos.length === 0) {
+      throw new NotFoundException(
+        `Não há nenhum fornecedor com o nome "${nome_usuario}".`,
+      );
+    }
+
+    return produtos;
   }
 
   async findByNome(nome_produto: string): Promise<Produto[]> {
