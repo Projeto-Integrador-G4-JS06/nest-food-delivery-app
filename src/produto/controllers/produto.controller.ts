@@ -45,10 +45,10 @@ export class ProdutoController {
 
   @Get('/fornecedor/:nome_usuario')
   @HttpCode(HttpStatus.OK)
-  findByFornecedor(
+  async findByFornecedor(
     @Param('nome_usuario') nome_usuario: string,
   ): Promise<Produto[]> {
-    return this.produtoService.findByFornecedor(nome_usuario);
+    return await this.produtoService.findByFornecedor(nome_usuario);
   }
 
   @Get('nome/:nome_produto')

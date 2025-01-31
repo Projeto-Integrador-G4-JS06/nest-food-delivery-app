@@ -7,8 +7,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Projeto Delivery App')
-    .setDescription('Projeto Delivery')
+    .setTitle('PedeAí Delivery App')
+    .setDescription('Tá com fome? PedeAí')
     .setContact(
       'Grupo 04 - JS06',
       'https://github.com/Projeto-Integrador-G4-JS06',
