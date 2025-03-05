@@ -23,6 +23,7 @@ import { NumericTransformer } from '../../util/numerictransformer';
 @Entity({ name: 'tb_produtos' })
 export class Produto {
   @PrimaryGeneratedColumn()
+  @ApiProperty()
   id: number;
 
   @Transform(({ value }: TransformFnParams) => value?.trim())
