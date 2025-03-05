@@ -63,7 +63,7 @@ export class Produto {
   nutri_score: string;
 
   @IsBoolean()
-  @Column({ type: 'boolean', default: true })
+  @Column({ type: 'boolean', default: true, nullable: true })
   @ApiProperty()
   status: boolean;
 
