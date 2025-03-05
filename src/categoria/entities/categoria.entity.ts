@@ -25,7 +25,6 @@ export class Categoria {
   nome_categoria: string;
 
   @Column({ type: 'boolean', nullable: true, default: true })
-  @IsNotEmpty()
   @ApiProperty()
   status: boolean;
 

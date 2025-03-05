@@ -25,7 +25,6 @@ export class Usuario {
 
   @ApiProperty()
   @Transform(({ value }: TransformFnParams) => value?.trim())
-  @IsNotEmpty()
   @Column({ length: 14, nullable: true })
   tipo: string;
 
