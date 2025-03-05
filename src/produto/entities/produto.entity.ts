@@ -62,8 +62,7 @@ export class Produto {
   @ApiProperty()
   nutri_score: string;
 
-  @IsBoolean()
-  @Column({ type: 'boolean', default: true, nullable: true })
+  @Column({ type: 'boolean', nullable: true, default: true })
   @ApiProperty()
   status: boolean;
 
