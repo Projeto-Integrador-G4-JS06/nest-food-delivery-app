@@ -58,29 +58,29 @@ export class ProdutoService {
     return postagem;
   }
 
-  async findByFornecedor(nome_usuario: string): Promise<Produto[]> {
-    return this.produtoRepository
-      .createQueryBuilder('p')
-      .select([
-        'p.id',
-        'p.nome_produto',
-        'p.preco',
-        'p.descricao',
-        'p.foto',
-        'u.nome_usuario AS fornecedor',
-        'u.foto AS logo_Fornecedor',
-        'c.nome_categoria AS Categoria',
-        'p.nutri_score',
-        'p.criado_em',
-        'p.atualizado_em',
-        "CASE WHEN p.status = true THEN 'Disponível' WHEN p.status = false THEN 'Indisponível' END AS status_prod",
-      ])
-      .innerJoin('p.usuario', 'u')
-      .innerJoin('p.categoria', 'c')
-      .where('u.nome_usuario = :nome_usuario', { nome_usuario })
-      .andWhere('u.tipo = :tipo', { tipo: 'fornecedor' })
-      .getRawMany();
-  }
+  // async findByFornecedor(nome_usuario: string): Promise<Produto[]> {
+  //   return this.produtoRepository
+  //     .createQueryBuilder('p')
+  //     .select([
+  //       'p.id',
+  //       'p.nome_produto',
+  //       'p.preco',
+  //       'p.descricao',
+  //       'p.foto',
+  //       'u.nome_usuario AS fornecedor',
+  //       'u.foto AS logo_Fornecedor',
+  //       'c.nome_categoria AS Categoria',
+  //       'p.nutri_score',
+  //       'p.criado_em',
+  //       'p.atualizado_em',
+  //       "CASE WHEN p.status = true THEN 'Disponível' WHEN p.status = false THEN 'Indisponível' END AS status_prod",
+  //     ])
+  //     .innerJoin('p.usuario', 'u')
+  //     .innerJoin('p.categoria', 'c')
+  //     .where('u.nome_usuario = :nome_usuario', { nome_usuario })
+  //     .andWhere('u.tipo = :tipo', { tipo: 'fornecedor' })
+  //     .getRawMany();
+  // }
 
   async findByNome(nome_produto: string): Promise<Produto[]> {
     return this.produtoRepository.find({

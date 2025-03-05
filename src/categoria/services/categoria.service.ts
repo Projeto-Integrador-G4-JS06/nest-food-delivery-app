@@ -10,12 +10,12 @@ export class CategoriaService {
     constructor(
         @InjectRepository(Categoria)
         private categoriaRepository: Repository<Categoria>
-    ){};
+    ) { };
 
     async findAll(): Promise<Categoria[]> {
         return await this.categoriaRepository.find({
-            relations:{
-                produto: true
+            relations: {
+                produto: true,
             }
         });
     };
@@ -25,27 +25,27 @@ export class CategoriaService {
             where: {
                 id
             },
-            relations:{
-                produto: true
+            relations: {
+                produto: true,
             }
         })
 
-        if(!categoria)
+        if (!categoria)
             throw new HttpException("Categoria não encontrada!", HttpStatus.NOT_FOUND)
         return categoria;
     };
 
     async findByNomeCategoria(nome_categoria: string): Promise<Categoria[]> {
         return this.categoriaRepository.find({
-          where: {
-            nome_categoria: ILike(`%${nome_categoria}%`),
-          },
-        //   relations: {
-        //     produto: true,
-        //   },
+            where: {
+                nome_categoria: ILike(`%${nome_categoria}%`),
+            },
+            relations: {
+                produto: true,
+            },
         });
-      }
-  
+    }
+
     async create(categoria: Categoria): Promise<Categoria> {
         return await this.categoriaRepository.save(categoria);
     };

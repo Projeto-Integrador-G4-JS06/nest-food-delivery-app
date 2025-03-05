@@ -14,11 +14,12 @@ import {
 import { Categoria } from '../entities/categoria.entity';
 import { CategoriaService } from '../services/categoria.service';
 import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-@ApiBearerAuth()
+@ApiTags('Categoria')
 @UseGuards(JwtAuthGuard)
 @Controller('/categorias')
+@ApiBearerAuth()
 export class CategoriaController {
   constructor(private readonly categoriaService: CategoriaService) {}
 
@@ -34,7 +35,6 @@ export class CategoriaController {
     return this.categoriaService.findById(id);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('/nome/:nome_categoria')
   @HttpCode(HttpStatus.OK)
   findByNomeCategoria(

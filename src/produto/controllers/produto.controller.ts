@@ -1,4 +1,4 @@
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import {
   Body,
   Controller,
@@ -18,10 +18,10 @@ import { ProdutoService } from '../services/produto.service';
 import { Produto } from '../entities/produto.entity';
 import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 
-// @UseGuards(JwtAuthGuard)
-@ApiBearerAuth()
+@ApiTags('Produto')
 @UseGuards(JwtAuthGuard)
 @Controller('/produtos')
+@ApiBearerAuth()
 export class ProdutoController {
   constructor(private readonly produtoService: ProdutoService) {}
 
@@ -43,13 +43,13 @@ export class ProdutoController {
     return this.produtoService.findById(id);
   }
 
-  @Get('/fornecedor/:nome_usuario')
-  @HttpCode(HttpStatus.OK)
-  async findByFornecedor(
-    @Param('nome_usuario') nome_usuario: string,
-  ): Promise<Produto[]> {
-    return await this.produtoService.findByFornecedor(nome_usuario);
-  }
+  // @Get('/fornecedor/:nome_usuario')
+  // @HttpCode(HttpStatus.OK)
+  // async findByFornecedor(
+  //   @Param('nome_usuario') nome_usuario: string,
+  // ): Promise<Produto[]> {
+  //   return await this.produtoService.findByFornecedor(nome_usuario);
+  // }
 
   @Get('nome/:nome_produto')
   @HttpCode(HttpStatus.OK)
