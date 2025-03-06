@@ -22,13 +22,13 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 export class CategoriaController {
   constructor(private readonly categoriaService: CategoriaService) { }
 
-  @Get()
+  @Get('/all')
   @HttpCode(HttpStatus.OK)
   findAll(): Promise<Categoria[]> {
     return this.categoriaService.findAll();
   }
 
-  @Get('/:id')
+  @Get('/id/:id')
   @HttpCode(HttpStatus.OK)
   findById(@Param('id', ParseIntPipe) id: number): Promise<Categoria> {
     return this.categoriaService.findById(id);

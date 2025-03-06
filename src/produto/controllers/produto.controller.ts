@@ -19,13 +19,12 @@ import { Produto } from '../entities/produto.entity';
 import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 
 @ApiTags('Produto')
-@UseGuards(JwtAuthGuard)
 @Controller('/produtos')
 @ApiBearerAuth()
 export class ProdutoController {
   constructor(private readonly produtoService: ProdutoService) {}
 
-  @Get()
+  @Get('/all')
   @HttpCode(HttpStatus.OK)
   findAll(): Promise<Produto[]> {
     return this.produtoService.findAll();
@@ -37,7 +36,7 @@ export class ProdutoController {
     return this.produtoService.findByNutriScore();
   }
 
-  @Get('/:id')
+  @Get('/id/:id')
   @HttpCode(HttpStatus.OK)
   findById(@Param('id', ParseIntPipe) id: number): Promise<Produto> {
     return this.produtoService.findById(id);
@@ -51,13 +50,13 @@ export class ProdutoController {
   //   return await this.produtoService.findByFornecedor(nome_usuario);
   // }
 
-  @Get('nome/:nome_produto')
+  @Get('/nome/:nome_produto')
   @HttpCode(HttpStatus.OK)
   findByNome(@Param('nome_produto') nome_produto: string): Promise<Produto[]> {
     return this.produtoService.findByNome(nome_produto);
   }
 
-  @Get('maior/:valor')
+  @Get('/maior/:valor')
   @HttpCode(HttpStatus.OK)
   findMaiorValor(
     @Param('valor', ParseFloatPipe) valor: number,
@@ -65,7 +64,7 @@ export class ProdutoController {
     return this.produtoService.findMaiorValor(valor);
   }
 
-  @Get('menor/:valor')
+  @Get('/menor/:valor')
   @HttpCode(HttpStatus.OK)
   findMenorValor(
     @Param('valor', ParseFloatPipe) valor: number,
@@ -78,19 +77,22 @@ export class ProdutoController {
     return this.produtoService.findByStatus(status.toLowerCase() === 'true');
   }
 
-  @Post()
+  @Post('/cadastrar')
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.CREATED)
   create(@Body() produto: Produto): Promise<Produto> {
     return this.produtoService.create(produto);
   }
 
-  @Put()
+  @Put('/atualizar')
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   update(@Body() produto: Produto): Promise<Produto> {
     return this.produtoService.update(produto);
   }
 
   @Delete('/:id')
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.produtoService.delete(id);
