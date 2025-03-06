@@ -31,7 +31,6 @@ export class Categoria {
   descricao: string;
 
   @Transform(({ value }: TransformFnParams) => value?.trim())
-  @IsNotEmpty()
   @Column({ length: 5000, nullable: true })
   @ApiProperty()
   icone: string;

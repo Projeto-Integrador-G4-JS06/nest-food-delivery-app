@@ -51,7 +51,6 @@ export class Produto {
   preco: number;
 
   @Transform(({ value }: TransformFnParams) => value?.trim())
-  @IsNotEmpty()
   @Column({ length: 5000, nullable: true })
   @ApiProperty()
   foto: string;
