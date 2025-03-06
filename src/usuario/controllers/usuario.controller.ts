@@ -17,7 +17,6 @@ import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 
 @ApiTags('Usuario')
 @Controller('/usuarios')
-@ApiBearerAuth()
 export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) {}
 
@@ -27,6 +26,7 @@ export class UsuarioController {
     return this.usuarioService.create(usuario);
   }
  
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Put('/atualizar')
   @HttpCode(HttpStatus.OK)
