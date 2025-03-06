@@ -17,11 +17,10 @@ import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Categoria')
-@UseGuards(JwtAuthGuard)
 @Controller('/categorias')
 @ApiBearerAuth()
 export class CategoriaController {
-  constructor(private readonly categoriaService: CategoriaService) {}
+  constructor(private readonly categoriaService: CategoriaService) { }
 
   @Get()
   @HttpCode(HttpStatus.OK)
@@ -44,18 +43,21 @@ export class CategoriaController {
   }
 
   @Post('/cadastrar')
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.CREATED)
   create(@Body() categoria: Categoria) {
     return this.categoriaService.create(categoria);
   }
 
   @Put('/atualizar')
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   update(@Body() categoria: Categoria) {
     return this.categoriaService.update(categoria);
   }
 
   @Delete('/:id')
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.categoriaService.delete(id);
