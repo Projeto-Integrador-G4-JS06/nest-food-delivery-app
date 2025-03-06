@@ -57,7 +57,7 @@ export class Usuario {
   cnpj: string;
 
   @ApiProperty()
-  @Column({ length: 5000, nullable: false })
+  @Column({ length: 5000, nullable: true })
   foto: string;
 
   @ApiProperty()
