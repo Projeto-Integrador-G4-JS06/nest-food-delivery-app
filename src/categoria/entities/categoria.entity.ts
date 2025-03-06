@@ -24,21 +24,27 @@ export class Categoria {
   @ApiProperty()
   nome_categoria: string;
 
-  @Column({ type: 'boolean', nullable: true, default: true })
-  @ApiProperty()
-  status: boolean;
-
   @Transform(({ value }: TransformFnParams) => value?.trim())
   @IsNotEmpty()
   @Column({ length: 255, nullable: false })
   @ApiProperty()
   descricao: string;
 
+  @Transform(({ value }: TransformFnParams) => value?.trim())
+  @IsNotEmpty()
+  @Column({ length: 5000, nullable: true })
+  @ApiProperty()
+  icone: string;
+
   @CreateDateColumn()
   criado_em: Date;
 
   @UpdateDateColumn()
   atualizado_em: Date;
+
+  @Column({ type: 'boolean', nullable: true, default: true })
+  @ApiProperty()
+  status: boolean;
 
   @ApiProperty()
   @OneToMany(() => Produto, (produto) => produto.categoria)
