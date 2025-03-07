@@ -66,10 +66,10 @@ export class Produto {
   @ApiProperty()
   status: boolean;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   criado_em: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
   atualizado_em: Date;
 
   @ApiProperty({ type: () => Categoria })
