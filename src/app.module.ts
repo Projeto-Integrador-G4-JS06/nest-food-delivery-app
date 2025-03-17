@@ -8,6 +8,7 @@ import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
 import { ProdService } from './data/prod.service';
 import { DevService } from './data/dev.service';
+import { HealthModule } from './health/health.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -19,6 +20,7 @@ import { DevService } from './data/dev.service';
     CategoriaModule,
     UsuarioModule,
     ProdutoModule,
+    HealthModule,
     // Inserir nome da classe module de cada entidade (ex.: PostagemModule)
   ],
   controllers: [AppController],
