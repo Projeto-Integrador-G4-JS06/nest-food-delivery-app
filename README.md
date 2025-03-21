@@ -1,4 +1,4 @@
-![image](https://ik.imagekit.io/czhooyc3x/Projeto%20Integrador%20-%20Delivery%20Food%20App/cover.png?updatedAt=1738355517866)
+![image](https://ik.imagekit.io/liaMatsubara/readme_imagem.png?updatedAt=1741796206960)
 
 # PedeAí - Aplicativo de Delivery de Alimentos 
 
